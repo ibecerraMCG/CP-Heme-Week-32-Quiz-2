@@ -1,0 +1,1169 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 32 Tuesday & Wednesday Practice Quiz</title>
+    <style>
+        /* --- CSS Variables & Themes --- */
+        :root {
+            /* Base Transition */
+            --transition-speed: 0.3s;
+            --font-main: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        /* 1. Modern Dark (Default) */
+        [data-theme="dark"] {
+            --bg-body: #1e293b;
+            --bg-card: #334155;
+            --bg-header: #0f172a;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --text-accent: #38bdf8;
+            --border-color: #475569;
+            --highlight-bg: #475569;
+            --button-bg: #38bdf8;
+            --button-text: #0f172a;
+            --button-hover: #0ea5e9;
+            --feedback-success-bg: #064e3b;
+            --feedback-success-border: #059669;
+            --feedback-success-text: #a7f3d0;
+            --feedback-error-bg: #7f1d1d;
+            --feedback-error-border: #dc2626;
+            --feedback-error-text: #fecaca;
+        }
+
+        /* 2. Modern Light */
+        [data-theme="light"] {
+            --bg-body: #f3f4f6;
+            --bg-card: #ffffff;
+            --bg-header: #ffffff;
+            --text-main: #1f2937;
+            --text-muted: #6b7280;
+            --text-accent: #2563eb;
+            --border-color: #e5e7eb;
+            --highlight-bg: #f3f4f6;
+            --button-bg: #2563eb;
+            --button-text: #ffffff;
+            --button-hover: #1d4ed8;
+            --feedback-success-bg: #ecfdf5;
+            --feedback-success-border: #34d399;
+            --feedback-success-text: #065f46;
+            --feedback-error-bg: #fef2f2;
+            --feedback-error-border: #f87171;
+            --feedback-error-text: #991b1b;
+        }
+
+        /* 3. Midnight (Pure Black) */
+        [data-theme="midnight"] {
+            --bg-body: #000000;
+            --bg-card: #000000;
+            --bg-header: #000000;
+            --text-main: #e0e0e0;
+            --text-muted: #888888;
+            --text-accent: #90caf9;
+            --border-color: #333333;
+            --highlight-bg: #1a1a1a;
+            --button-bg: #90caf9;
+            --button-text: #000000;
+            --button-hover: #42a5f5;
+            --feedback-success-bg: #051b11;
+            --feedback-success-border: #0f5132;
+            --feedback-success-text: #75b798;
+            --feedback-error-bg: #2c0b0e;
+            --feedback-error-border: #842029;
+            --feedback-error-text: #ea868f;
+        }
+
+        /* 4. Legacy Dark (Original) */
+        [data-theme="legacy-dark"] {
+            --bg-body: #2d343e;
+            --bg-card: #3c424f;
+            --bg-header: #3c424f;
+            --text-main: #e8e6e3;
+            --text-muted: #b0c4de;
+            --text-accent: #8ab4f8;
+            --border-color: #555;
+            --highlight-bg: #454c5a;
+            --button-bg: #8ab4f8;
+            --button-text: #202124;
+            --button-hover: #a3c5f9;
+            --feedback-success-bg: #344e41;
+            --feedback-success-border: #52b788;
+            --feedback-success-text: #c7f9cc;
+            --feedback-error-bg: #5e2129;
+            --feedback-error-border: #a4133c;
+            --feedback-error-text: #f8d7da;
+        }
+
+        /* 5. Sepia (Reading Mode) */
+        [data-theme="sepia"] {
+            --bg-body: #f4ecd8;
+            --bg-card: #fdf6e3;
+            --bg-header: #e4d5b7;
+            --text-main: #433422;
+            --text-muted: #7c6f5a;
+            --text-accent: #a05a2c;
+            --border-color: #d3c4a5;
+            --highlight-bg: #ebe1c9;
+            --button-bg: #a05a2c;
+            --button-text: #fdf6e3;
+            --button-hover: #864822;
+            --feedback-success-bg: #e6f4ea;
+            --feedback-success-border: #8ab893;
+            --feedback-success-text: #2e4c35;
+            --feedback-error-bg: #f9e3e3;
+            --feedback-error-border: #d48f8f;
+            --feedback-error-text: #5c2b2b;
+        }
+
+        /* 6. High Contrast */
+        [data-theme="contrast"] {
+            --bg-body: #000000;
+            --bg-card: #000000;
+            --bg-header: #000000;
+            --text-main: #ffffff;
+            --text-muted: #dddddd;
+            --text-accent: #ffff00;
+            --border-color: #ffffff;
+            --highlight-bg: #333333;
+            --button-bg: #ffff00;
+            --button-text: #000000;
+            --button-hover: #e6e600;
+            --feedback-success-bg: #000000;
+            --feedback-success-border: #00ff00;
+            --feedback-success-text: #00ff00;
+            --feedback-error-bg: #000000;
+            --feedback-error-border: #ff0000;
+            --feedback-error-text: #ff0000;
+        }
+
+        /* --- Global Reset & Layout --- */
+        * { box-sizing: border-box; }
+        
+        body {
+            font-family: var(--font-main);
+            margin: 0;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            transition: background-color var(--transition-speed), color var(--transition-speed);
+            line-height: 1.6;
+        }
+
+        /* --- Header --- */
+        header {
+            background-color: var(--bg-header);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            /* Default to Sticky */
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        /* Class to remove sticky behavior */
+        header.unpinned {
+            position: relative;
+            box-shadow: none;
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        header h1 {
+            font-size: 1.25rem;
+            margin: 0;
+            color: var(--text-accent);
+        }
+
+        .controls-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .pin-btn {
+            background: none;
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            cursor: pointer;
+            padding: 6px 10px;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: background-color 0.2s;
+        }
+
+        .pin-btn:hover {
+            background-color: var(--highlight-bg);
+        }
+
+        .pin-btn.pin-active {
+            color: var(--text-accent);
+            border-color: var(--text-accent);
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        .theme-control {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        select#theme-select {
+            padding: 6px 12px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-card);
+            color: var(--text-main);
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        /* --- Section Navigation --- */
+        .section-nav {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .section-nav button {
+            background-color: var(--highlight-bg);
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .section-nav button:hover {
+            border-color: var(--text-accent);
+            color: var(--text-accent);
+        }
+
+        /* --- Main Content --- */
+        .container {
+            max-width: 850px;
+            margin: 2rem auto;
+            padding: 0 1rem 4rem 1rem;
+        }
+
+        .section-header {
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--text-accent);
+            color: var(--text-accent);
+            font-size: 1.5rem;
+            font-weight: 700;
+            scroll-margin-top: 140px; /* Offset for sticky header */
+        }
+
+        /* --- Question Card --- */
+        .question-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease;
+        }
+
+        .lo-box {
+            background-color: var(--highlight-bg);
+            border-left: 4px solid var(--text-accent);
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        .question-text {
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        /* --- Options --- */
+        .options-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .option-label {
+            display: flex;
+            align-items: flex-start;
+            padding: 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .option-label:hover {
+            background-color: var(--highlight-bg);
+            border-color: var(--text-muted);
+        }
+
+        .option-label input {
+            margin-top: 0.3rem;
+            margin-right: 1rem;
+            accent-color: var(--text-accent);
+            transform: scale(1.2);
+        }
+
+        /* --- Buttons --- */
+        .btn-check {
+            margin-top: 1.5rem;
+            background-color: var(--button-bg);
+            color: var(--button-text);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.2s;
+            font-size: 1rem;
+        }
+
+        .btn-check:hover {
+            opacity: 0.9;
+        }
+
+        /* --- Feedback Area --- */
+        .feedback {
+            margin-top: 1.5rem;
+            padding: 1.5rem;
+            border-radius: 8px;
+            display: none; /* Hidden by default */
+            border: 1px solid transparent;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .feedback.correct {
+            background-color: var(--feedback-success-bg);
+            border-color: var(--feedback-success-border);
+            color: var(--feedback-success-text);
+        }
+
+        .feedback.incorrect {
+            background-color: var(--feedback-error-bg);
+            border-color: var(--feedback-error-border);
+            color: var(--feedback-error-text);
+        }
+
+        .feedback-header {
+            font-weight: 800;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .rationale {
+            margin-top: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .source {
+            display: block;
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            opacity: 0.8;
+            font-style: italic;
+            border-top: 1px dashed currentColor;
+            padding-top: 0.5rem;
+        }
+
+        /* --- Mobile Tweaks --- */
+        @media (max-width: 600px) {
+            .header-top { flex-direction: column; gap: 10px; align-items: flex-start; }
+            .controls-wrapper { width: 100%; justify-content: space-between; }
+            .question-card { padding: 1.5rem; }
+            header h1 { font-size: 1.1rem; }
+            .section-nav { justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <header id="main-header">
+        <div class="header-top">
+            <h1>Week 32 Tuesday & Wednesday Practice Quiz</h1>
+            <div class="controls-wrapper">
+                <!-- Pin Button -->
+                <button class="pin-btn pin-active" id="pin-btn" onclick="toggleHeader()" title="Pin/Unpin Header">
+                    📍
+                </button>
+                
+                <div class="theme-control">
+                    <label for="theme-select">Theme:</label>
+                    <select id="theme-select" onchange="changeTheme(this.value)">
+                        <option value="dark">Modern Dark</option>
+                        <option value="midnight">Midnight</option>
+                        <option value="light">Modern Light</option>
+                        <option value="legacy-dark">Legacy Dark</option>
+                        <option value="sepia">Sepia</option>
+                        <option value="contrast">High Contrast</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <!-- Dynamic Navigation Bar injected via JS -->
+        <div class="section-nav" id="section-nav"></div>
+    </header>
+
+    <div class="container" id="quiz-root">
+        <!-- Content injected via JS -->
+    </div>
+
+    <script>
+        // --- Data ---
+        const quizData =[
+            // --- Section 1: Acid-Base ---
+            {
+                section: "Acid-Base",
+                maskedLO: "LO1: Be able to define the normal range for [topic] and describe the consequences that occur when the normal range is exceeded.",
+                fullLO: "LO1: Be able to define the normal range for acid-base balance and describe the consequences that occur when the normal range is exceeded",
+                question: "A 24-year-old healthy male volunteer participates in a respiratory physiology study. An arterial blood gas is drawn at rest to establish his baseline parameters. According to strict physiological standards, which of the following values represents the average normal arterial pH in this subject?",
+                options: {
+                    A: "6.80",
+                    B: "7.00",
+                    C: "7.25",
+                    D: "7.40",
+                    E: "8.00"
+                },
+                correctAnswer: "D",
+                rationale: "The normal hydrogen ion concentration in the extracellular fluid corresponds to an average normal pH of 7.4 (specifically 7.40 for arterial blood). The extremes of pH that can be tolerated before death ensues are 6.8 and 8.0.",
+                source: "Acid-Base, Slide 2 & 3: \"Normal pH = 7.4\" and \"Extracellular fluid | Arterial blood | 7.40\""
+            },
+            {
+                section: "Acid-Base",
+                maskedLO: "LO1: Be able to define the normal range for [topic] and describe the consequences that occur when the normal range is exceeded.",
+                fullLO: "LO1: Be able to define the normal range for acid-base balance and describe the consequences that occur when the normal range is exceeded",
+                question: "A 22-year-old woman is brought to the emergency department after experiencing a severe panic attack. Her respiratory rate is 35/min, and an arterial blood gas analysis reveals a pH of 7.55, confirming an alkalosis. Due to this acid-base derangement, the physician should closely monitor the patient for which of the following clinical consequences?",
+                options: {
+                    A: "Coma",
+                    B: "Hypotension",
+                    C: "Paralytic ileus",
+                    D: "Profound weakness",
+                    E: "Tetany"
+                },
+                correctAnswer: "E",
+                rationale: "Alkalosis shifts the body into a state of hyperexcitability. The classic consequences of alkalosis include hyperactive reflexes, tetany, atrial tachycardia, dysrhythmias, and seizures. Conversely, weakness, hypotension, paralytic ileus, and coma are symptoms of acidosis.",
+                source: "Acid-Base, Slide 5: \"Symptoms of Metabolic Alkalosis: Respiration slow and shallow, Hyperactive reflexes ; tetany, Often related to depletion of electrolytes, Atrial tachycardia, Dysrhythmias\""
+            },
+            {
+                section: "Acid-Base",
+                maskedLO: "LO2: Be able to explain the sources of acids and bases that must be dealt with to maintain [topic] homeostasis.",
+                fullLO: "LO2: Be able to explain the sources of acids and bases that must be dealt with to maintain acid-base balance.",
+                question: "A 45-year-old man consumes a specialized high-protein diet as part of a bodybuilding regimen. The metabolism of these proteins generates a significant daily acid load that his body must actively buffer and excrete. The acid generated directly from the breakdown of these dietary proteins is best classified as which of the following?",
+                options: {
+                    A: "Basic anhydrides",
+                    B: "Bicarbonate salts",
+                    C: "Nonvolatile acids",
+                    D: "Volatile acids",
+                    E: "Weak organic bases"
+                },
+                correctAnswer: "C",
+                rationale: "The body gains protons (H+) through several mechanisms, one of which is the production of nonvolatile acids derived from protein metabolism and the breakdown of other organic molecules.",
+                source: "Acid-Base, Slide 4: \"GAIN: Production of nonvolatile acids from protein metabolism and organic molecules\""
+            },
+            {
+                section: "Acid-Base",
+                maskedLO: "LO2: Be able to explain the sources of acids and bases that must be dealt with to maintain [topic] homeostasis.",
+                fullLO: "LO2: Be able to explain the sources of acids and bases that must be dealt with to maintain acid-base balance.",
+                question: "A 30-year-old woman presents to the clinic with severe, protracted diarrhea over the past four days. Arterial blood gas analysis reveals a significant metabolic acidosis. Which of the following physiological processes best explains the primary source of the increased acid load in this patient?",
+                options: {
+                    A: "Decreased renal reabsorption of volatile acids",
+                    B: "Gain of H+ from the loss of HCO3-",
+                    C: "Loss of H+ in the stool",
+                    D: "Overproduction of carbonic acid in the tissues",
+                    E: "Recombination of H+ and HCO3- in pulmonary capillaries"
+                },
+                correctAnswer: "B",
+                rationale: "The body experiences a relative gain of hydrogen ions (H+) when bicarbonate (HCO3-) is lost from the body. Severe diarrhea results in the massive loss of nongastric GI fluids, which are rich in bicarbonate, thereby causing a metabolic acidosis.",
+                source: "Acid-Base, Slide 4: \"GAIN: Gain of H+ from loss of HCO3- in diarrhea and other nongastric GI fluids\""
+            },
+            {
+                section: "Acid-Base",
+                maskedLO: "LO3: Be able to describe the role of buffers in regulating body pH and be able to define the chemical characteristics of a ‘buffer’ as it relates to [topic].",
+                fullLO: "LO3: Be able to describe the role of buffers in regulating body pH and be able to define the chemical characteristics of a ‘buffer’ as it relates to acid-base homeostasis.",
+                question: "A researcher is evaluating a newly synthesized chemical buffer for potential intravenous use to maintain blood pH during surgery. For this chemical to function effectively as a physiological buffer, it must inherently possess which of the following chemical characteristics?",
+                options: {
+                    A: "It must act as a strong acid that fully dissociates in an aqueous solution.",
+                    B: "It must act as a strong base that rapidly consumes all free protons.",
+                    C: "It must be a weak acid or base that tends to not fully dissociate.",
+                    D: "It must have a pKa greater than 10.",
+                    E: "It must remain completely undissociated at physiological pH."
+                },
+                correctAnswer: "C",
+                rationale: "A buffer works by establishing an equilibrium between a weak acid and its conjugate base. By definition, weak acids and bases tend to not fully dissociate (forming a strongly associated pair), which allows them to either donate or accept protons to resist sudden changes in pH. Strong acids/bases fully dissociate and cannot effectively buffer.",
+                source: "Acid-Base, Slide 8: \"Strong acids/bases fully dissociate in H2O (weakly associated pair). Weak acids/bases tend to not fully dissociate (strongly associated pair)\""
+            },
+            {
+                section: "Acid-Base",
+                maskedLO: "LO3: Be able to describe the role of buffers in regulating body pH and be able to define the chemical characteristics of a ‘buffer’ as it relates to[topic].",
+                fullLO: "LO3: Be able to describe the role of buffers in regulating body pH and be able to define the chemical characteristics of a ‘buffer’ as it relates to acid-base homeostasis.",
+                question: "A 55-year-old man with chronic kidney disease presents with a metabolic acidosis. While the bicarbonate system manages extracellular fluid pH, the physician considers the patient's intracellular buffering capacity. Which of the following components represents 60-70% of the total chemical buffering capacity within the body's cells?",
+                options: {
+                    A: "Bicarbonate ions",
+                    B: "Carbonic acid",
+                    C: "Intracellular proteins",
+                    D: "Phosphate ions",
+                    E: "Sulfate anions"
+                },
+                correctAnswer: "C",
+                rationale: "Intracellular proteins (such as hemoglobin in red blood cells) are important intracellular buffers and represent 60-70% of the total chemical buffering capacity in the body.",
+                source: "Acid-Base, Slide 21: \"Chemical acid-base buffer systems. Proteins: Important Intracellular Buffers... Represents 60-70% of the total chemical buffering capacity\""
+            },
+            {
+                section: "Acid-Base",
+                maskedLO: "LO4: Be able to describe the role of the [specific buffer] system in acid/base homeostasis and identify the key components of this system as they relate to the Henderson-Hasselbalch equation.",
+                fullLO: "LO4: Be able to describe the role of the bicarbonate-buffer system in acid/base homeostasis and identify the key components of this system as they relate to the Henderson-Hasselbalch equation.",
+                question: "A medical student is studying the properties of the bicarbonate buffer system. She notes that its pKa is 6.1, which is more than a full pH unit away from the physiological pH of 7.4. Despite this poor chemical profile, it remains the most important buffer system in the body. This is primarily because the body maintains the bicarbonate to carbonic acid ratio at 20:1 through the direct regulatory action of which of the following organs?",
+                options: {
+                    A: "Brain",
+                    B: "Heart",
+                    C: "Kidneys",
+                    D: "Liver",
+                    E: "Lungs"
+                },
+                correctAnswer: "E",
+                rationale: "The bicarbonate buffer system is not ideal chemically because its pKa is far from the physiological pH (meaning the acid portion is mostly used up). However, it is highly effective because it is an open system where the lungs tightly control the denominator (carbonic acid/CO2), maintaining a 20:1 ratio.",
+                source: "Acid-Base, Slides 18 & 22: \"BBS at Physiological pH: 1. Pka far from physiological pH (acid all used up)... LUNGS KEEP RATIO AT 20:1 BY CONTROLLING THIS (HA)\""
+            },
+            {
+                section: "Acid-Base",
+                maskedLO: "LO4: Be able to describe the role of the[specific buffer] system in acid/base homeostasis and identify the key components of this system as they relate to the Henderson-Hasselbalch equation.",
+                fullLO: "LO4: Be able to describe the role of the bicarbonate-buffer system in acid/base homeostasis and identify the key components of this system as they relate to the Henderson-Hasselbalch equation.",
+                question: "A 61-year-old woman with a 40-pack-year smoking history presents with severe emphysema and moderate respiratory distress. Her arterial blood gas shows a PaCO2 of 59 mm Hg, a pH of 7.37, and a bicarbonate concentration of 32 mEq/L. Based on the Henderson-Hasselbalch relationship, what is the most accurate description of her primary acid-base disorder?",
+                options: {
+                    A: "Compensated metabolic acidosis",
+                    B: "Compensated respiratory acidosis",
+                    C: "Non-compensated metabolic alkalosis",
+                    D: "Non-compensated respiratory acidosis",
+                    E: "Non-compensated respiratory alkalosis"
+                },
+                correctAnswer: "B",
+                rationale: "The patient has an acidic pH (7.37, which is below 7.40 but within the lower normal bounds). The PaCO2 is highly elevated (59 mm Hg), indicating a respiratory source for the acidosis (too much carbonic acid). The bicarbonate is also elevated (32 mEq/L, normal is 22-28), indicating that the kidneys have retained bicarbonate to compensate, bringing the ratio back toward 20:1 and the pH near normal.",
+                source: "Acid-Base, Slide 30: \"pH = 7.37 (acidic); PCO2 = 59 (high) - CO2 is carbonic ACID - so could be cause of an acidosis = Respiratory acidosis; TCO2 (bicarbonate) = 32 above normal range (so IS compensating). Answer = Compensated respiratory acidosis\""
+            },
+            {
+                section: "Acid-Base",
+                maskedLO: "LO5: Be able to describe the three main mechanisms by which [specific ion] is handled (i.e. the chemical, respiratory and renal pathways...).",
+                fullLO: "LO5: Be able to describe the three main mechanisms by which hydrogen ion is handled (i.e. the chemical, respiratory and renal pathways for handling hydrogen ion buffering and excretion).",
+                question: "A 25-year-old man receives a rapid intravenous infusion of a slightly acidic medication. To prevent a sudden and fatal drop in blood pH, his body must immediately sequester the excess hydrogen ions. Which of the following mechanisms reacts fastest (within seconds) to handle this sudden proton load?",
+                options: {
+                    A: "Chemical acid-base buffer systems",
+                    B: "Excretion of acidic urine",
+                    C: "Reabsorption of bicarbonate by the kidneys",
+                    D: "Renal acid-base regulation",
+                    E: "Respiratory acid-base regulation"
+                },
+                correctAnswer: "A",
+                rationale: "The body has three main mechanisms to regulate pH. The chemical acid-base buffer systems act almost immediately (within seconds) to sequester H+ until it can be removed. The respiratory system acts within minutes, and the renal system acts over days.",
+                source: "Acid-Base, Slide 20: \"Chemical Acid-Base Buffer Systems: (SUPER FAST!! - sec) Chemical buffers that react to H+ generation almost immediately; sequester H+ until it can be removed.\""
+            },
+            {
+                section: "Acid-Base",
+                maskedLO: "LO5: Be able to describe the three main mechanisms by which[specific ion] is handled (i.e. the chemical, respiratory and renal pathways...).",
+                fullLO: "LO5: Be able to describe the three main mechanisms by which hydrogen ion is handled (i.e. the chemical, respiratory and renal pathways for handling hydrogen ion buffering and excretion).",
+                question: "A 22-year-old woman develops diabetic ketoacidosis, resulting in a sudden accumulation of nonvolatile acids in her blood. To compensate for this metabolic acidosis, her body attempts to restore the pH. Which of the following physiological responses will act within minutes to mitigate the acidemia?",
+                options: {
+                    A: "Decreased respiratory rate",
+                    B: "Increased bicarbonate reabsorption",
+                    C: "Increased proton excretion in the urine",
+                    D: "Release of phosphate buffers from bone",
+                    E: "Respiratory removal of CO2"
+                },
+                correctAnswer: "E",
+                rationale: "In response to metabolic acidosis, the respiratory system provides fast compensation (within minutes) by increasing alveolar ventilation to blow off CO2 (and thus H2CO3), shifting the equation to reduce hydrogen ion concentration. Renal compensation (bicarbonate reabsorption and proton excretion) is powerful but takes days.",
+                source: "Acid-Base, Slide 20: \"Respiratory Acid-Base Regulation: (FAST - minutes) Regulates the removal of CO2 (and H2CO3) from the extracellular fluid within minutes\""
+            },
+
+            // --- Section 2: Endemic Mycoses ---
+            {
+                section: "Endemic Mycoses",
+                maskedLO: "LO1: Contrast the pathogenesis of [various endemic mycoses] with TB.",
+                fullLO: "LO1: Contrast the pathogenesis of histoplasmosis, histoplasmosis, blastomycosis, coccidioidomycosis, cryptococcosis, and sporotrichosis with TB.",
+                question: "A 45-year-old man develops a chronic pulmonary infection. A lung biopsy reveals a fungal infection characterized by a pyogranulomatous inflammatory response, containing both dense infiltrates of neutrophils and epithelioid macrophages. Which of the following organisms typically elicits this specific mixed inflammatory pattern?",
+                options: {
+                    A: "Blastomyces dermatitidis",
+                    B: "Coccidioides immitis",
+                    C: "Cryptococcus neoformans",
+                    D: "Histoplasma capsulatum",
+                    E: "Mycobacterium tuberculosis"
+                },
+                correctAnswer: "A",
+                rationale: "The pathogenesis of blastomycosis involves the inhalation of aerosolized conidia that convert to yeast. These yeast are attacked by the immune system, resulting in a characteristic \"pyogranulomatous response\" (a mix of suppurative/neutrophilic and granulomatous inflammation).",
+                source: "Endemic Mycoses Handout, Page 4: \"Aerosolized mould fragments and conidia inhaled -> convert to yeast which are phagocytosed (killed in pyogranulomatous response)\" and Endemic Mycoses Slide Deck, Slide 27: \"Blastomycosis (pathogenesis): pyogranuloma (PMNs + yeast)\""
+            },
+            {
+                section: "Endemic Mycoses",
+                maskedLO: "LO1: Contrast the pathogenesis of [various endemic mycoses] with TB.",
+                fullLO: "LO1: Contrast the pathogenesis of histoplasmosis, histoplasmosis, blastomycosis, coccidioidomycosis, cryptococcosis, and sporotrichosis with TB.",
+                question: "A 30-year-old man from Ohio presents with fever and a diffuse pulmonary infiltrate after exploring local caves. He is diagnosed with acute pulmonary histoplasmosis. Following inhalation, the organism transitions to a yeast form that survives inside the host's alveolar macrophages. Which of the following mechanisms allows this organism to evade destruction and persist intracellularly?",
+                options: {
+                    A: "Down-regulating the production of IL-12 and IFN-gamma",
+                    B: "Elaborating a thick polysaccharide capsule",
+                    C: "Producing large amounts of urease to alkalinize the phagolysosome",
+                    D: "Secreting melanin to scavenge free radicals",
+                    E: "Transforming into a large spherule to avoid ingestion"
+                },
+                correctAnswer: "A",
+                rationale: "Histoplasma capsulatum microconidia reach the alveoli, where they convert to small yeast forms. These yeasts are phagocytosed but survive within alveolar macrophages by down-regulating IL-12 and INF-γ, thereby evading the host's initial cell-mediated immune response.",
+                source: "Endemic Mycoses Handout, Page 1: \"Small, 2-5u microconidium (easily inhaled) -> alveoli -> small, pyriform (pear-shaped) yeast phagocytosed & survive in alveolar macrophages by down-regulating IL-12 and INF-y.\""
+            },
+            {
+                section: "Endemic Mycoses",
+                maskedLO: "LO2: Identify the portal of entry for each of the [specific fungal infections].",
+                fullLO: "LO2: Identify the portal of entry for each of the endemic mycoses.",
+                question: "A 55-year-old avid gardener develops a painless, verrucous papule on his right index finger that subsequently ulcerates. Over the next two weeks, several similar nodular lesions appear in a linear distribution ascending his right forearm. The pathogen responsible for this condition gains entry into the human body primarily via which of the following portals?",
+                options: {
+                    A: "Cutaneous inoculation",
+                    B: "Ingestion of contaminated soil",
+                    C: "Inhalation of arthroconidia",
+                    D: "Inhalation of microconidia",
+                    E: "Mucosal contact with infected animal droplets"
+                },
+                correctAnswer: "A",
+                rationale: "The patient has lymphocutaneous sporotrichosis (caused by Sporothrix schenckii), which classically presents as ascending nodular lesions along lymphatic channels following traumatic cutaneous inoculation (such as a prick from a rose thorn or contact with sphagnum moss).",
+                source: "Endemic Mycoses Handout, Page 7: \"Lymphocutaneous sporotrichosis (Raising roses -> risk of inoculating spores into skin thorn -> painless, papulonodular, verrucous, or ulcerative lesions along lymphatic channels in a row)\""
+            },
+            {
+                section: "Endemic Mycoses",
+                maskedLO: "LO2: Identify the portal of entry for each of the [specific fungal infections].",
+                fullLO: "LO2: Identify the portal of entry for each of the endemic mycoses.",
+                question: "An outbreak of acute respiratory illness occurs among construction workers who are demolishing an old, bird-infested building in the Mississippi River Valley. Subsequent testing confirms acute pulmonary histoplasmosis. These workers acquired the infection through which of the following portals of entry?",
+                options: {
+                    A: "Cutaneous inoculation of hyphae",
+                    B: "Ingestion of contaminated bird droppings",
+                    C: "Inhalation of aerosolized microconidia",
+                    D: "Inhalation of encapsulated yeast",
+                    E: "Inhalation of endospore-containing spherules"
+                },
+                correctAnswer: "C",
+                rationale: "Histoplasma capsulatum grows in soil enriched with bird or bat guano. Disturbing this soil (via demolition or earth-moving) aerosolizes the spores. Infection occurs via the inhalation of the small microconidia (3-4 µm), which easily reach the alveoli.",
+                source: "Endemic Mycoses Handout, Page 1: \"H. capsulatum grows particularly well in the soil... (bird guano--especially starlings) -> inhalation of spores... Small, 2-5u microconidium (easily inhaled)\""
+            },
+            {
+                section: "Endemic Mycoses",
+                maskedLO: "LO3: Distinguish the form of the [fungal infection] in nature versus that found in the human body.",
+                fullLO: "LO3: Distinguish the form of the endemic mycosis in nature versus that found in the human body.",
+                question: "A 40-year-old woman living in Arizona presents with fever, night sweats, and a dry cough. A chest x-ray reveals a thin-walled cavity, and she is diagnosed with coccidioidomycosis. While the organism exists as a large spherule in her lung tissue, which of the following morphological forms is found in the hot, dry soil of her environment?",
+                options: {
+                    A: "Broad-based budding yeast",
+                    B: "Encapsulated budding yeast",
+                    C: "Pleomorphic cigar-shaped yeast",
+                    D: "Septate hyphae with arthroconidia",
+                    E: "Tuberculate macroconidia"
+                },
+                correctAnswer: "D",
+                rationale: "Coccidioides species are thermally dimorphic. In nature (soil), they exist as septate hyphae where alternate segments degenerate to form arthroconidia. Once inhaled into the human body, they convert into large spherules.",
+                source: "Endemic Mycoses Handout, Page 5: \"Septate hyphae -> alternate hyphal segments degenerate (disjunctor cells) -> arthroconidia\""
+            },
+            {
+                section: "Endemic Mycoses",
+                maskedLO: "LO3: Distinguish the form of the [fungal infection] in nature versus that found in the human body.",
+                fullLO: "LO3: Distinguish the form of the endemic mycosis in nature versus that found in the human body.",
+                question: "A 50-year-old man from Wisconsin is diagnosed with pulmonary blastomycosis after a wet mount of his sputum reveals large, broad-based budding yeast. This thermally dimorphic fungus exists in a different morphological state in its natural habitat near local rivers and streams. Which of the following best describes its environmental form?",
+                options: {
+                    A: "Encapsulated yeast",
+                    B: "Filamentous mould",
+                    C: "Large spherule containing endospores",
+                    D: "Small intracellular yeast",
+                    E: "Unencapsulated budding yeast"
+                },
+                correctAnswer: "B",
+                rationale: "Blastomyces dermatitidis is a thermally dimorphic fungus. In nature (soil at ~25-27°C), it exists as a filamentous mould with conidia. At body temperature (37°C), it transitions into its yeast form, characterized by broad-based buds.",
+                source: "Endemic Mycoses Handout, Page 3: \"Thermally-dimorphic: soil (filamentous mould with conidia 4-5u in diameter)\""
+            },
+            {
+                section: "Endemic Mycoses",
+                maskedLO: "LO4: List the treatment of each of the [specific fungal infections] whether uncomplicated or not.",
+                fullLO: "LO4: List the treatment of each of the endemic mycoses whether uncomplicated or not.",
+                question: "A 32-year-old man with advanced AIDS (CD4 count < 100 cells/µL) presents with headache, fever, and confusion. Cerebrospinal fluid analysis shows a low white blood cell count and elevated opening pressure, and testing is positive for cryptococcal antigen. Which of the following is the most appropriate initial induction therapy for his cryptococcal meningitis?",
+                options: {
+                    A: "Fluconazole monotherapy",
+                    B: "Isavuconazole monotherapy",
+                    C: "Itraconazole monotherapy",
+                    D: "Liposomal amphotericin B and flucytosine",
+                    E: "Methylprednisolone and itraconazole"
+                },
+                correctAnswer: "D",
+                rationale: "The standard induction therapy for cryptococcal meningitis consists of a combination of Liposomal Amphotericin B (L-AmB) and flucytosine. This is followed by consolidation and maintenance phases using fluconazole.",
+                source: "Endemic Mycoses Slide Deck, Slide 78: \"Cryptococcal meningitis (Rx): induction Rx... L-AmB + flucytosine\""
+            },
+            {
+                section: "Endemic Mycoses",
+                maskedLO: "LO4: List the treatment of each of the [specific fungal infections] whether uncomplicated or not.",
+                fullLO: "LO4: List the treatment of each of the endemic mycoses whether uncomplicated or not.",
+                question: "A 60-year-old landscaper is diagnosed with lymphocutaneous sporotrichosis after presenting with a chain of ulcerated nodular lesions ascending his right arm. He has no evidence of pulmonary or disseminated disease. Which of the following is the most appropriate pharmacotherapy for this patient's localized infection?",
+                options: {
+                    A: "Fluconazole",
+                    B: "Flucytosine",
+                    C: "Itraconazole",
+                    D: "Liposomal amphotericin B",
+                    E: "Methylprednisolone"
+                },
+                correctAnswer: "C",
+                rationale: "For lymphocutaneous and fixed cutaneous sporotrichosis, the treatment of choice is itraconazole (typically given as an oral solution) for 3-6 months. Liposomal amphotericin B is reserved for disseminated, meningeal, or severe pulmonary disease.",
+                source: "Endemic Mycoses Handout, Page 8: \"Lymphocutaneous & fixed cutaneous: itraconazole (3-6 months)\""
+            },
+            {
+                section: "Endemic Mycoses",
+                maskedLO: "LO5: Outline the diagnostic approach to each of the [specific fungal infections].",
+                fullLO: "LO5: Outline the diagnostic approach to each of the endemic mycoses.",
+                question: "A 52-year-old man from Ohio presents with a 2-week history of severe fever, weight loss, and cough. A chest x-ray demonstrates diffuse bilateral pulmonary infiltrates. He is suspected to have severe acute diffuse pulmonary histoplasmosis. Which of the following diagnostic tests provides the highest sensitivity for confirming this active infection?",
+                options: {
+                    A: "Antigen detection (EIA) of urine and serum",
+                    B: "Direct microscopic examination of sputum with India ink",
+                    C: "Fungal culture of blood",
+                    D: "Gram stain of sputum",
+                    E: "Serology for Histoplasma antibodies"
+                },
+                correctAnswer: "A",
+                rationale: "In cases of diffuse, heavy-inoculum histoplasmosis, antigen detection (via enzyme immunoassay) of both urine and serum is highly sensitive (83%), compared to sputum culture which is much less sensitive.",
+                source: "Endemic Mycoses Slide Deck, Slide 14: \"Acute pulmonary histoplasmosis (diffuse disease)... Ag detection (EIA) urine + serum (sens = 83%)\""
+            },
+            {
+                section: "Endemic Mycoses",
+                maskedLO: "LO5: Outline the diagnostic approach to each of the [specific fungal infections].",
+                fullLO: "LO5: Outline the diagnostic approach to each of the endemic mycoses.",
+                question: "A 40-year-old man with AIDS presents with severe headache and lethargy. Cryptococcal meningitis is suspected, and a lumbar puncture is performed to obtain cerebrospinal fluid (CSF). Which of the following tests performed on the CSF provides the highest sensitivity and specificity (greater than 90%) for establishing the diagnosis of this infection?",
+                options: {
+                    A: "Cryptococcal antigen assay",
+                    B: "Fungal culture",
+                    C: "Gram stain",
+                    D: "India ink mount",
+                    E: "Mucicarmine stain"
+                },
+                correctAnswer: "A",
+                rationale: "For the diagnosis of cryptococcal meningitis, the CSF cryptococcal antigen test is highly sensitive and specific (>90%), making it the most reliable rapid diagnostic test compared to the India ink mount or waiting for culture.",
+                source: "Endemic Mycoses Slide Deck, Slide 77: \"Cryptococcosis (diagnosis—meningitis & disseminated)... CSF Cryptococcal Ag (sens & spec > 90%)\""
+            },
+
+            // --- Section 3: Respiratory Tract Neoplasia ---
+            {
+                section: "Respiratory Tract Neoplasia",
+                maskedLO: "LO1: Describe[specific carcinoma] in regard to the major etiological factors, usual histologic type, and significance of region of involvement.",
+                fullLO: "LO1: Describe laryngeal carcinoma in regard to the major etiological factors, usual histologic type, and significance of region of laryngeal involvement.",
+                question: "A 62-year-old man with a 40-pack-year smoking history presents with persistent hoarseness. Direct laryngoscopy reveals a firm, irregular mass on the true vocal cords (glottis). A biopsy confirms the most common malignancy of the larynx. Which of the following histologic features is most likely to be seen in this tumor specimen?",
+                options: {
+                    A: "Finely granular chromatin with nuclear molding",
+                    B: "Glandular differentiation with mucin production",
+                    C: "Keratinization and intercellular bridges",
+                    D: "Nests of cells in a background of vascular fibrous stroma",
+                    E: "Prominent nucleoli and abundant cytoplasm without keratin"
+                },
+                correctAnswer: "C",
+                rationale: "Approximately 95% of laryngeal carcinomas are squamous cell carcinomas. The diagnostic histologic features of squamous cell carcinoma include keratinization and intercellular bridges.",
+                source: "Respiratory Tract Neoplasia, Slides 30 & 72: \"Laryngeal Carcinoma: Squamous cell carcinoma (~ 95% of cases)\" and \"Squamous Cell Carcinoma: Diagnostic Criteria... 1. Keratinization 2. Intercellular bridges\""
+            },
+            {
+                section: "Respiratory Tract Neoplasia",
+                maskedLO: "LO1: Describe [specific carcinoma] in regard to the major etiological factors, usual histologic type, and significance of region of involvement.",
+                fullLO: "LO1: Describe laryngeal carcinoma in regard to the major etiological factors, usual histologic type, and significance of region of laryngeal involvement.",
+                question: "A 65-year-old man is diagnosed with squamous cell carcinoma of the larynx. The oncologist explains that his prognosis is relatively good because the tumor is isolated exclusively to the glottis. Which of the following anatomic features of the glottic region primarily accounts for this more favorable survival rate compared to supraglottic tumors?",
+                options: {
+                    A: "Abundant lymphatic network facilitating immune surveillance",
+                    B: "Dense capillary network preventing tumor ischemia",
+                    C: "Lack of contiguous cartilage",
+                    D: "Proximity to the anterior commissure",
+                    E: "Sparse lymphatic drainage delaying metastasis"
+                },
+                correctAnswer: "E",
+                rationale: "Glottic carcinomas have the best survival rate (80-90%) because they typically present early (due to hoarseness) and the true vocal cords have sparse lymphatic drainage, which delays regional metastasis. In contrast, the supraglottic region has an abundant lymphatic network.",
+                source: "Respiratory Tract Neoplasia, Slide 37: \"Why does glottic carcinoma have the best survival rate? Glottic: Early onset of hoarseness, Sparse lymphatic drainage\""
+            },
+            {
+                section: "Respiratory Tract Neoplasia",
+                maskedLO: "LO2: Identify the major etiologic agents and risk factors for [specific carcinoma].",
+                fullLO: "LO2: Identify the major etiologic agents and risk factors for lung carcinoma.",
+                question: "A 58-year-old man who has worked in shipyards and plumbing for 40 years presents with a newly discovered lung mass. He has smoked 1 pack of cigarettes daily since age 18. While his occupational exposures contribute to his pulmonary pathology, which of the following etiologic factors is statistically responsible for 85-90% of all lung cancers?",
+                options: {
+                    A: "Asbestos inhalation",
+                    B: "Cadmium exposure",
+                    C: "Genetic predisposition",
+                    D: "Radon gas exposure",
+                    E: "Voluntary or involuntary cigarette smoking"
+                },
+                correctAnswer: "E",
+                rationale: "While radiation, asbestos, and metals are all risk factors for lung cancer, voluntary (direct) or involuntary (second-hand) cigarette smoking is the overwhelming cause, responsible for 85-90% of all lung cancers.",
+                source: "Respiratory Tract Neoplasia, Slide 42: \"Lung Cancer Etiology and Pathogenesis: 85-90% of lung cancers caused by voluntary (direct) or involuntary (second-hand) cigarette smoking\""
+            },
+            {
+                section: "Respiratory Tract Neoplasia",
+                maskedLO: "LO2: Identify the major etiologic agents and risk factors for [specific carcinoma].",
+                fullLO: "LO2: Identify the major etiologic agents and risk factors for lung carcinoma.",
+                question: "A 70-year-old man presents with progressive dyspnea and right-sided chest pain. Imaging reveals a diffuse mass completely encasing the right lung. Biopsy demonstrates a biphasic pattern consisting of both epithelioid and sarcomatoid cells. Which of the following environmental exposures is the most significant risk factor for developing this specific malignancy?",
+                options: {
+                    A: "Asbestos inhalation",
+                    B: "Cadmium exposure",
+                    C: "Cigarette smoking",
+                    D: "Formaldehyde exposure",
+                    E: "Radon gas exposure"
+                },
+                correctAnswer: "A",
+                rationale: "The patient's clinical and histologic picture describes malignant mesothelioma (encasement of the lung, biphasic histology). The primary risk factor for malignant mesothelioma is asbestos inhalation, which often carries a long latent period of 40+ years.",
+                source: "Respiratory Tract Neoplasia, Slides 112 & 113: \"Malignant Mesothelioma... Encasement of lung... Risk factors: Asbestos inhalation\""
+            },
+            {
+                section: "Respiratory Tract Neoplasia",
+                maskedLO: "LO3: Describe the basic pathogenesis of [specific carcinoma] and identify common associated molecular events.",
+                fullLO: "LO3: Describe the basic pathogenesis of lung carcinoma and identify common associated molecular events.",
+                question: "A 50-year-old woman of East Asian descent presents with a peripheral lung mass. She has never smoked cigarettes. A biopsy confirms adenocarcinoma. Molecular profiling is ordered to guide targeted tyrosine kinase inhibitor therapy. Which of the following genes is most likely to harbor a driving somatic mutation in this patient's tumor?",
+                options: {
+                    A: "ALK",
+                    B: "EGFR",
+                    C: "FGFR1",
+                    D: "KRAS",
+                    E: "MYC"
+                },
+                correctAnswer: "B",
+                rationale: "Somatic EGFR mutations are prototypical driver mutations for lung adenocarcinomas and are found in their highest frequency among never smokers, women, and individuals of Eastern Asian origin. These tumors are sensitive to targeted tyrosine kinase inhibitors (like erlotinib).",
+                source: "Respiratory Tract Neoplasia, Slide 47: \"EGFR Mutations: 10-45% of adenocarcinomas, Highest frequency in: Never smokers, Women, Eastern Asia origin... Tumors sensitive to tyrosine kinase inhibitors\""
+            },
+            {
+                section: "Respiratory Tract Neoplasia",
+                maskedLO: "LO3: Describe the basic pathogenesis of [specific carcinoma] and identify common associated molecular events.",
+                fullLO: "LO3: Describe the basic pathogenesis of lung carcinoma and identify common associated molecular events.",
+                question: "A 60-year-old man with a 50-pack-year history of smoking is diagnosed with an invasive mucinous adenocarcinoma of the lung. Genetic analysis reveals an activating mutation in a gene that codes for a RAS protein with GTPase activity. This patient is unlikely to benefit from anti-EGFR adjuvant therapies. Which of the following genes is mutated?",
+                options: {
+                    A: "BRCA-1",
+                    B: "EGFR",
+                    C: "KRAS",
+                    D: "PIK3CA",
+                    E: "TP53"
+                },
+                correctAnswer: "C",
+                rationale: "KRAS mutations are common driver mutations in lung adenocarcinomas, with the highest frequency occurring in smokers. KRAS codes for a RAS protein with GTPase activity, and its mutation leads to constitutive activation. Patients with KRAS mutations are unlikely to benefit from anti-EGFR therapies.",
+                source: "Respiratory Tract Neoplasia, Slides 47 & 54: \"KRAS Mutations: Highest frequency in: Smokers... Patients unlikely to benefit from adjuvant chemotherapy or anti-EGFR therapies\" and \"KRAS codes for a RAS protein With GTPase activity\""
+            },
+            {
+                section: "Respiratory Tract Neoplasia",
+                maskedLO: "LO4: Compare and contrast the major types of [specific carcinoma] in regards to the following: clinical signs and symptoms, morphological features, and treatment options.",
+                fullLO: "LO4: Compare and contrast the major types of lung carcinoma in regards to the following: clinical signs and symptoms, morphological features, and treatment options.",
+                question: "A 67-year-old man presents with increasing dyspnea. A CT scan of the chest shows a centrally located mass in the main stem bronchus. Biopsy of the mass reveals cells with scant cytoplasm, poorly defined borders, nuclear molding, and finely granular chromatin. Immunohistochemistry is strongly positive for synaptophysin. Which of the following is the most likely diagnosis?",
+                options: {
+                    A: "Adenocarcinoma",
+                    B: "Large cell carcinoma",
+                    C: "Malignant mesothelioma",
+                    D: "Small cell carcinoma",
+                    E: "Squamous cell carcinoma"
+                },
+                correctAnswer: "D",
+                rationale: "Small cell carcinoma typically presents as a central mass and is characterized morphologically by small cells with scant cytoplasm, ill-defined borders, finely granular chromatin, and nuclear molding. It also demonstrates neuroendocrine differentiation, staining positive for markers like synaptophysin and chromogranin.",
+                source: "Respiratory Tract Neoplasia, Slide 79: \"Small Cell Carcinoma: Usual Location: Central... Diagnostic Criteria: 1. Small cells with scant cytoplasm 2. Poorly defined cell borders 3. Finely granular chromatin... 5. Nuclear molding... Immunohistochemical expression of neuroendocrine marker(s)\""
+            },
+            {
+                section: "Respiratory Tract Neoplasia",
+                maskedLO: "LO4: Compare and contrast the major types of[specific carcinoma] in regards to the following: clinical signs and symptoms, morphological features, and treatment options.",
+                fullLO: "LO4: Compare and contrast the major types of lung carcinoma in regards to the following: clinical signs and symptoms, morphological features, and treatment options.",
+                question: "A 62-year-old woman presents with weight loss and a peripherally located lung mass. Biopsy reveals neoplastic cells growing along intact alveolar septa without invading the stroma. Immunohistochemical staining is positive for TTF1 and negative for p40. Which of the following is the most likely diagnosis?",
+                options: {
+                    A: "Adenocarcinoma",
+                    B: "Large cell carcinoma",
+                    C: "Small cell carcinoma",
+                    D: "Squamous cell carcinoma",
+                    E: "Typical carcinoid tumor"
+                },
+                correctAnswer: "A",
+                rationale: "Adenocarcinoma typically arises in the periphery of the lung. Morphological patterns include lepidic growth (neoplastic cells growing along alveolar septa, formerly known as bronchioloalveolar carcinoma or BAC). It stains positive for TTF1 and negative for p40 (a squamous marker).",
+                source: "Respiratory Tract Neoplasia, Slides 67, 69, & 76: \"Adenocarcinoma Usual Location: Peripheral\" and \"Lepidic (formerly BAC) Neoplastic cells growing along alveolar septa\" and \"Adenocarcinoma Positive: TTF1\""
+            },
+            {
+                section: "Respiratory Tract Neoplasia",
+                maskedLO: "LO5: Compare and contrast primary[specific neoplasms] with those metastatic to the [specific organ].",
+                fullLO: "LO5: Compare and contrast primary lung neoplasms with those metastatic to the lung",
+                question: "A 66-year-old man is evaluated for weight loss and a chronic cough. Imaging reveals multiple, bilateral nodules located in the periphery of both lungs. A biopsy of one of the nodules shows an adenocarcinoma. Immunohistochemical staining is negative for TTF1 and cytokeratin 7 (CK7), but strongly positive for cytokeratin 20 (CK20). Which of the following is the most likely origin of these neoplastic cells?",
+                options: {
+                    A: "Breast",
+                    B: "Colon",
+                    C: "Larynx",
+                    D: "Lung",
+                    E: "Prostate"
+                },
+                correctAnswer: "B",
+                rationale: "Differentiating primary lung adenocarcinoma from metastatic adenocarcinoma relies on immunohistochemistry. Primary lung adenocarcinoma is typically CK7 positive and TTF-1 positive. In contrast, metastatic colon adenocarcinoma is characteristically CK20 positive and TTF-1 negative.",
+                source: "Respiratory Tract Neoplasia, Slide 110: \"1° Lung vs. Metastatic Adenocarcinoma... Primary Lung: CK 7 [positive], TTF-1[positive]... Metastasis From Colon: CK 20[positive]\""
+            },
+            {
+                section: "Respiratory Tract Neoplasia",
+                maskedLO: "LO5: Compare and contrast primary [specific neoplasms] with those metastatic to the [specific organ].",
+                fullLO: "LO5: Compare and contrast primary lung neoplasms with those metastatic to the lung",
+                question: "A 70-year-old woman undergoes a CT scan of the chest, which reveals neoplastic disease within the pulmonary cavity. The radiologist notes features that strongly suggest a metastatic origin rather than a primary lung carcinoma. Which of the following radiographic findings most strongly supports the diagnosis of metastatic disease?",
+                options: {
+                    A: "A solitary, centrally located mass",
+                    B: "A solitary, peripherally located mass",
+                    C: "Diffuse encasement of the entire pleural surface",
+                    D: "Multiple bilateral peripheral lesions",
+                    E: "Thickened apical cavities with dependent infiltrates"
+                },
+                correctAnswer: "D",
+                rationale: "Almost any primary tumor can metastasize to the lung due to its high blood flow and dense capillary network. Features that strongly favor metastatic neoplasms over primary lung cancer include multiple lesions, bilateral involvement, and a peripheral location. Primary lung carcinomas are usually solitary at the time of diagnosis.",
+                source: "Respiratory Tract Neoplasia, Slide 106: \"Features Favoring Metastatic Neoplasms: Multiple, Bilateral, Peripheral. Primary Lung Carcinoma (usually solitary at time of diagnosis)\""
+            },
+            {
+                section: "Respiratory Tract Neoplasia",
+                maskedLO: "LO6: Describe [specific carcinoma] staging in regards to basic features used for staging and utility for treatment and prognosis.",
+                fullLO: "LO6: Describe lung carcinoma staging in regards to basic features used for staging and utility for treatment and prognosis",
+                question: "A 55-year-old man is diagnosed with non-small cell lung carcinoma. The oncology team uses the TNM classification system to determine the clinical stage of his disease in order to guide treatment. Which of the following parameters is directly assessed by the \"T\" component of this staging system?",
+                options: {
+                    A: "Degree of cellular differentiation",
+                    B: "Distant organ metastasis",
+                    C: "Primary tumor size and local characteristics",
+                    D: "Regional lymph node involvement",
+                    E: "Systemic paraneoplastic manifestations"
+                },
+                correctAnswer: "C",
+                rationale: "The TNM staging classification for lung carcinoma is based on three main parameters: T represents the primary Tumor characteristics (e.g., size, local invasion), N represents regional lymph Node status, and M represents distant Metastasis.",
+                source: "Respiratory Tract Neoplasia, Slide 93: \"Staging of Lung Carcinoma TNM Classification: T: primary Tumor characteristics\""
+            },
+            {
+                section: "Respiratory Tract Neoplasia",
+                maskedLO: "LO6: Describe [specific carcinoma] staging in regards to basic features used for staging and utility for treatment and prognosis.",
+                fullLO: "LO6: Describe lung carcinoma staging in regards to basic features used for staging and utility for treatment and prognosis",
+                question: "A 60-year-old man is diagnosed with small cell carcinoma of the lung. Imaging shows that the tumor is confined to the left hemithorax with ipsilateral lymph node involvement, classifying it clinically as \"Limited\" stage disease. Which of the following is the most appropriate usual treatment option for this patient?",
+                options: {
+                    A: "Chemotherapy and radiation therapy",
+                    B: "Chemotherapy alone",
+                    C: "Palliative care only",
+                    D: "Radiation therapy alone",
+                    E: "Surgical resection alone"
+                },
+                correctAnswer: "A",
+                rationale: "For Small Cell Carcinoma, \"Limited\" stage disease (~30% of cases) is usually treated with a combination of Chemotherapy + Radiation. \"Extensive\" stage disease is usually treated with Chemotherapy alone (with radiation used only for palliation).",
+                source: "Respiratory Tract Neoplasia, Slide 98: \"Small Cell Carcinoma - Survival & Treatment by Stage... Limited (~30% of cases)... Usual Treatment Options: Chemotherapy + Radiation\""
+            },
+            {
+                section: "Respiratory Tract Neoplasia",
+                maskedLO: "LO7: Describe [specific condition] in regards to etiology and risk factors, morphologic features, and prognosis.",
+                fullLO: "LO7: Describe malignant mesothelioma in regards to etiology and risk factors, morphologic features, and prognosis.",
+                question: "A 72-year-old man presents with right-sided chest pain and dyspnea. He worked as a shipyard pipefitter for 30 years. Imaging shows marked thickening and encasement of the right lung by the pleura. A biopsy reveals a malignant neoplasm. To help differentiate this tumor from a primary adenocarcinoma, the pathologist performs immunohistochemical staining. This tumor will most likely be positive for which of the following markers?",
+                options: {
+                    A: "Calretinin",
+                    B: "CD15 (Leu M1)",
+                    C: "Carcinoembryonic antigen (CEA)",
+                    D: "Napsin A",
+                    E: "TTF1"
+                },
+                correctAnswer: "A",
+                rationale: "The patient's presentation and occupational history (asbestos exposure) are classic for malignant mesothelioma. Malignant mesothelioma is immunohistochemically positive for Calretinin, Cytokeratin 5/6, and WT-1. It is negative for CEA, MOC31, CD15, TTF1, and Napsin A (which are typically positive in adenocarcinoma).",
+                source: "Respiratory Tract Neoplasia, Slide 118: \"Malignant Mesothelioma vs Adenocarcinoma: Malignant Mesothelioma... Calretinin (Nuclear & Cytoplasmic) Yes\""
+            },
+            {
+                section: "Respiratory Tract Neoplasia",
+                maskedLO: "LO7: Describe [specific condition] in regards to etiology and risk factors, morphologic features, and prognosis.",
+                fullLO: "LO7: Describe malignant mesothelioma in regards to etiology and risk factors, morphologic features, and prognosis.",
+                question: "A pathologist is examining a pleural biopsy from a patient with a diffuse pleural mass. The tissue shows spindle cells resembling a sarcoma. To differentiate a sarcomatoid malignant mesothelioma from a true sarcoma, the pathologist orders immunohistochemical stains. The presence of which of the following markers would strongly favor sarcomatoid mesothelioma over a true sarcoma?",
+                options: {
+                    A: "Carcinoembryonic antigen (CEA)",
+                    B: "Cytokeratin",
+                    C: "MOC31",
+                    D: "Napsin A",
+                    E: "TTF1"
+                },
+                correctAnswer: "B",
+                rationale: "Malignant mesothelioma can have an epithelioid, sarcomatoid, or biphasic histology. Sarcomatoid mesothelioma strongly resembles true sarcomas on H&E staining. However, sarcomatoid mesothelioma is Cytokeratin positive, whereas most true sarcomas are Cytokeratin negative.",
+                source: "Respiratory Tract Neoplasia, Slide 117: \"Malignant Mesothelioma – Differential Dx: Sarcomatoid vs. True Sarcoma ? Sarcomatoid Mesothelioma Cytokeratin + (Most true sarcomas are cytokeratin negative)\""
+            }
+        ];
+
+        // --- Core Logic ---
+        const quizRoot = document.getElementById('quiz-root');
+        const themeSelect = document.getElementById('theme-select');
+        const pinBtn = document.getElementById('pin-btn');
+        const mainHeader = document.getElementById('main-header');
+        const sectionNav = document.getElementById('section-nav');
+
+        function initQuiz() {
+            // Render Questions
+            let currentSection = "";
+            let sectionIndex = 0;
+            
+            quizData.forEach((item, index) => {
+                // Insert Section Header if needed
+                if (item.section !== currentSection) {
+                    currentSection = item.section;
+                    
+                    // Create ID for scrolling
+                    const sectionId = 'sec-' + sectionIndex;
+                    
+                    // Add Section Header
+                    const sectionHeader = document.createElement('h2');
+                    sectionHeader.className = 'section-header';
+                    sectionHeader.id = sectionId;
+                    sectionHeader.textContent = currentSection;
+                    quizRoot.appendChild(sectionHeader);
+
+                    // Add Nav Button dynamically
+                    const navBtn = document.createElement('button');
+                    // Abbreviate longer titles for the buttons if desired
+                    let btnText = currentSection;
+                    if (btnText.includes("Respiratory Tract Neoplasia")) btnText = "Resp. Tract Neoplasia";
+                    
+                    navBtn.textContent = btnText;
+                    navBtn.onclick = () => {
+                        document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+                    };
+                    sectionNav.appendChild(navBtn);
+
+                    sectionIndex++;
+                }
+
+                // Create Card
+                const card = document.createElement('div');
+                card.className = 'question-card';
+                card.id = `q-card-${index}`;
+
+                // Learning Objective (Masked)
+                const loBox = document.createElement('div');
+                loBox.className = 'lo-box';
+                loBox.id = `lo-${index}`;
+                loBox.innerHTML = item.maskedLO;
+                card.appendChild(loBox);
+
+                // Question Text
+                const qText = document.createElement('div');
+                qText.className = 'question-text';
+                qText.innerHTML = `${index + 1}. ${item.question}`;
+                card.appendChild(qText);
+
+                // Options Container
+                const optionsGrid = document.createElement('div');
+                optionsGrid.className = 'options-grid';
+
+                for (const[key, value] of Object.entries(item.options)) {
+                    const label = document.createElement('label');
+                    label.className = 'option-label';
+                    
+                    const input = document.createElement('input');
+                    input.type = 'radio';
+                    input.name = `question-${index}`;
+                    input.value = key;
+
+                    const span = document.createElement('span');
+                    // Retain letters: A. Option Text
+                    span.innerHTML = `${key}. ${value}`;
+
+                    label.appendChild(input);
+                    label.appendChild(span);
+                    optionsGrid.appendChild(label);
+                }
+                card.appendChild(optionsGrid);
+
+                // Check Button
+                const btn = document.createElement('button');
+                btn.className = 'btn-check';
+                btn.textContent = 'Check Answer';
+                btn.onclick = () => checkAnswer(index);
+                card.appendChild(btn);
+
+                // Feedback Container
+                const feedback = document.createElement('div');
+                feedback.className = 'feedback';
+                feedback.id = `feedback-${index}`;
+                card.appendChild(feedback);
+
+                quizRoot.appendChild(card);
+            });
+
+            // Load saved theme
+            const savedTheme = localStorage.getItem('quizTheme') || 'dark';
+            changeTheme(savedTheme);
+            themeSelect.value = savedTheme;
+
+            // Load saved pin state
+            const savedPinState = localStorage.getItem('headerPinned');
+            // Default to true (pinned) if not set or if set to true
+            if (savedPinState === 'false') {
+                toggleHeader(false); 
+            } else {
+                toggleHeader(true);
+            }
+        }
+
+        function checkAnswer(index) {
+            const selected = document.querySelector(`input[name="question-${index}"]:checked`);
+            const feedbackEl = document.getElementById(`feedback-${index}`);
+            const loEl = document.getElementById(`lo-${index}`);
+            const data = quizData[index];
+
+            if (!selected) {
+                alert("Please select an answer.");
+                return;
+            }
+
+            // Reveal LO
+            loEl.innerHTML = data.fullLO;
+
+            // Generate Feedback HTML
+            const isCorrect = selected.value === data.correctAnswer;
+            
+            let html = `<span class="feedback-header">${isCorrect ? "Correct!" : "Incorrect"}</span>`;
+            if (!isCorrect) {
+                html += `<div>The correct answer is <strong>${data.correctAnswer}</strong>.</div>`;
+            }
+            
+            html += `<div class="rationale"><strong>Rationale:</strong> ${data.rationale}</div>`;
+            html += `<div class="source"><strong>Source:</strong> ${data.source}</div>`;
+
+            feedbackEl.innerHTML = html;
+            feedbackEl.className = `feedback ${isCorrect ? 'correct' : 'incorrect'}`;
+            feedbackEl.style.display = 'block';
+        }
+
+        function changeTheme(themeName) {
+            document.documentElement.setAttribute('data-theme', themeName);
+            localStorage.setItem('quizTheme', themeName);
+        }
+
+        function toggleHeader(forceState) {
+            // Determine current state based on class presence
+            const isCurrentlyPinned = !mainHeader.classList.contains('unpinned');
+            
+            // If forceState is provided (boolean), use it. Otherwise toggle current state.
+            const newState = (typeof forceState === 'boolean') ? forceState : !isCurrentlyPinned;
+
+            if (newState) {
+                // Pin
+                mainHeader.classList.remove('unpinned');
+                pinBtn.classList.add('pin-active');
+                localStorage.setItem('headerPinned', 'true');
+            } else {
+                // Unpin
+                mainHeader.classList.add('unpinned');
+                pinBtn.classList.remove('pin-active');
+                localStorage.setItem('headerPinned', 'false');
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', initQuiz);
+
+    </script>
+</body>
+</html>
